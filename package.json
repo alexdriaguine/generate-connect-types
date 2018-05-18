@@ -7,7 +7,6 @@
   "main": "index.js",
   "devDependencies": {
     "@types/node": "^10.1.2",
-    "@types/react-redux": "^6.0.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0"
   },
