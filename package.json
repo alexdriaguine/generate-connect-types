@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "typescript": "^2.8.3"
+  },
+  "name": "generate-connect-types",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "@types/node": "^10.1.2",
+    "@types/react-redux": "^6.0.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
+  },
+  "keywords": [
+    "typescript",
+    "prop types",
+    "react",
+    "redux",
+    "react-redux",
+    "automatic generation"
+  ],
+  "author": "Alexandre Driaguine",
+  "license": "MIT",
+  "description": ""
+}
