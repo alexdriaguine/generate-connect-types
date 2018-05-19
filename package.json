@@ -9,7 +9,8 @@
     "compile": "tsc -p tsconfig.json",
     "compile:watch": "tsc -p tsconfig.json -w",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepublish": "yarn test && yarn compile"
   },
   "dependencies": {
     "typescript": "^2.8.3"
