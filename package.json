@@ -1,16 +1,18 @@
 {
-  "dependencies": {
-    "ramda": "^0.25.0",
-    "typescript": "^2.8.3"
-  },
   "name": "generate-connect-types",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
+  "bin": {
+    "generate-connect-types": "build/index.js"
+  },
   "scripts": {
     "compile": "tsc -p tsconfig.json",
     "compile:watch": "tsc -p tsconfig.json -w",
     "test": "jest",
     "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "typescript": "^2.8.3"
   },
   "devDependencies": {
     "@types/jest": "^22.2.3",
