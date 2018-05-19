@@ -1,4 +1,7 @@
-# What is this?
+# generate-connect-types
+[![npm version](https://badge.fury.io/js/generate-connect-types.svg)](https://badge.fury.io/js/generate-connect-types)
+
+## What is this?
 
 This is something that is supposed to generate interfaces for your connected components
 
