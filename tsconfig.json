@@ -2,7 +2,10 @@
   "compilerOptions": {
     "noEmitOnError": false,
     "rootDir": "./lib",
+    "outDir": "./build",
     "jsx": "preserve",
+    "target": "es6",
+    "module": "commonjs",
     "lib": ["es5", "es6", "es2015", "es2016", "es2017"]
   },
   "exclude": ["./foo", "node_modules"]
