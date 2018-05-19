@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "ramda": "^0.25.0",
     "typescript": "^2.8.3"
   },
   "name": "generate-connect-types",
@@ -7,12 +8,18 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc -p tsconfig.json",
-    "watch": "tsc -p tsconfig.json -w"
+    "compile:watch": "tsc -p tsconfig.json -w",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
+    "@types/jest": "^22.2.3",
     "@types/node": "^10.1.2",
+    "@types/ramda": "^0.25.29",
+    "jest": "^22.4.4",
     "react-redux": "^5.0.7",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "ts-jest": "^22.4.6"
   },
   "keywords": [
     "typescript",
@@ -24,5 +31,19 @@
   ],
   "author": "Alexandre Driaguine",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }
