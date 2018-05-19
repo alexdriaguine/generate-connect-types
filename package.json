@@ -1,7 +1,7 @@
 {
   "name": "generate-connect-types",
-  "version": "0.0.1",
-  "main": "index.js",
+  "version": "0.0.3",
+  "main": "build/index.js",
   "bin": {
     "generate-connect-types": "build/index.js"
   },
