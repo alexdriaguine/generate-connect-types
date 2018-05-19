@@ -5,6 +5,10 @@
   "name": "generate-connect-types",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "compile": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json -w"
+  },
   "devDependencies": {
     "@types/node": "^10.1.2",
     "react-redux": "^5.0.7",
