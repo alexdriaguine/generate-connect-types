@@ -5,12 +5,16 @@ import * as fs from 'fs'
 import * as path from 'path'
 import {getTypeInformationFromNode} from './type-checker'
 import {insertInterfaceTemplateIntoFileContent} from './template'
+import {platform} from 'os'
 
 const fileName = process.argv.slice(2)[0]
 if (!fileName) {
   throw new Error('Need a filename!')
 }
-const fullFileName = path.resolve(process.cwd(), fileName)
+let fullFileName = path.resolve(process.cwd(), fileName)
+if (platform() === 'win32') {
+  fullFileName = fullFileName.replace(/\\/gi, '/')
+}
 
 const program = ts.createProgram([fullFileName], {
   noEmit: true,
