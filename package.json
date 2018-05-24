@@ -1,10 +1,13 @@
 {
   "name": "generate-connect-types",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "build/index.js",
   "bin": {
     "generate-connect-types": "build/index.js"
   },
+  "files": [
+    "build"
+  ],
   "scripts": {
     "compile": "tsc -p tsconfig.json",
     "compile:watch": "tsc -p tsconfig.json -w",
