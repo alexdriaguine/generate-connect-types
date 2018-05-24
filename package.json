@@ -18,7 +18,11 @@
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "@types/node": "^10.1.2",
+    "@types/prettier": "^1.12.4",
+    "@types/react-redux": "^6.0.0",
+    "@types/redux": "^3.6.0",
     "jest": "^22.4.4",
+    "prettier": "^1.12.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "ts-jest": "^22.4.6"
