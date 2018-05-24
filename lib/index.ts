@@ -3,13 +3,8 @@
 import * as ts from 'typescript'
 import * as fs from 'fs'
 import * as path from 'path'
-import {
-  isConnectArrowFunctionArgument,
-  isObjectType,
-  getProps,
-  getTypeInformationFromNode,
-} from './type-checker'
-import {template, insertInterfaceTemplateIntoFileContent} from './template'
+import {getTypeInformationFromNode} from './type-checker'
+import {insertInterfaceTemplateIntoFileContent} from './template'
 
 const fileName = process.argv.slice(2)[0]
 if (!fileName) {
