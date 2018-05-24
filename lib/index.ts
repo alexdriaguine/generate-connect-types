@@ -18,8 +18,7 @@ if (platform() === 'win32') {
 
 const program = ts.createProgram([fullFileName], {
   noEmit: true,
-  target: ts.ScriptTarget.ES5,
-  module: ts.ModuleKind.CommonJS,
+  target: ts.ScriptTarget.ES2015,
   jsx: ts.JsxEmit.Preserve,
   rootDir: process.cwd(),
 })
