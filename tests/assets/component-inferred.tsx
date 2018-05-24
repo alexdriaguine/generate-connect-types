@@ -1,5 +1,8 @@
-import { connect } from "react-redux";
-import * as prettier from "prettier";
+import {
+  connect as _connect,
+  InferableComponentEnhancerWithProps
+} from "react-redux";
+import { MapDispatchToProps, MergeProps, Options } from "react-redux";
 
 
 interface ConnectProps {
@@ -36,6 +39,17 @@ const state: State = {
       fudge: true
     }
   }
+};
+
+type MapStateToProps = (state: State) => any;
+
+const connect = function(
+  mapStateToProps?: MapStateToProps,
+  mapDispatchToProps?: MapDispatchToProps<any, any>,
+  mergeProps?: MergeProps<any, any, any, any>,
+  options?: Options
+): InferableComponentEnhancerWithProps<any, any> {
+  return _connect.apply(undefined, arguments);
 };
 
 const Comp = props => <div>hehe</div>;
