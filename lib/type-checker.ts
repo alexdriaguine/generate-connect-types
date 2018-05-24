@@ -1,19 +1,15 @@
 import * as ts from 'typescript'
-import {flatten} from './utils'
 
-function mapToPropArray(res: string) {
-  return res
-    .replace(/{|}/g, '')
-    .split(';')
-    .map(r => r.trim())
-    .filter(r => r)
+export interface Prop {
+  propName: string
+  typeName: string
 }
 
 function isArrowFunction(node: ts.Node) {
   return node.kind === ts.SyntaxKind.ArrowFunction
 }
 
-function isJsxElement(node: ts.Node) {
+function isJsxComponentDeclaration(node: ts.Node) {
   return node.getChildren().some(n => n.kind === ts.SyntaxKind.JsxElement)
 }
 
@@ -21,12 +17,12 @@ function isConnectChild(node: ts.Node) {
   return node.parent.getFullText().includes('connect')
 }
 
-export function getProps(results: string[]) {
-  return results.map(mapToPropArray).reduce(flatten, [])
-}
-
 export function isConnectArrowFunctionArgument(node: ts.Node) {
-  return isArrowFunction(node) && !isJsxElement(node) && isConnectChild(node)
+  return (
+    isArrowFunction(node) &&
+    !isJsxComponentDeclaration(node) &&
+    isConnectChild(node)
+  )
 }
 
 export function isObjectType(flags: ts.TypeFlags) {
@@ -37,18 +33,27 @@ export function getTypeInformationFromNode(
   node: ts.Node,
   typeChecker: ts.TypeChecker,
 ) {
-  const results = [] as Array<string>
+  const results = [] as Array<Prop>
 
   function visitNode(node: ts.Node) {
     if (isConnectArrowFunctionArgument(node)) {
-      const sym = typeChecker.getTypeAtLocation(node).symbol
+      const symbol = typeChecker.getTypeAtLocation(node).symbol
       const type = typeChecker.getTypeOfSymbolAtLocation(
-        sym,
-        sym.valueDeclaration,
+        symbol,
+        symbol.valueDeclaration,
       )
       const returnType = type.getCallSignatures()[0].getReturnType()
       if (isObjectType(returnType.flags)) {
-        results.push(typeChecker.typeToString(returnType))
+        const returnTypeProperties = returnType.getProperties()
+        returnTypeProperties.forEach(prop => {
+          const type = typeChecker.getTypeOfSymbolAtLocation(
+            prop,
+            prop.valueDeclaration,
+          )
+          const name = prop.getName()
+          const typeName = typeChecker.typeToString(type)
+          results.push({propName: name, typeName})
+        })
       }
     }
     ts.forEachChild(node, visitNode)
@@ -56,5 +61,5 @@ export function getTypeInformationFromNode(
 
   visitNode(node)
 
-  return getProps(results)
+  return results
 }
