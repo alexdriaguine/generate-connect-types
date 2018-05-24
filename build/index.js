@@ -6,11 +6,15 @@ const fs = require("fs");
 const path = require("path");
 const type_checker_1 = require("./type-checker");
 const template_1 = require("./template");
+const os_1 = require("os");
 const fileName = process.argv.slice(2)[0];
 if (!fileName) {
     throw new Error('Need a filename!');
 }
-const fullFileName = path.resolve(process.cwd(), fileName);
+let fullFileName = path.resolve(process.cwd(), fileName);
+if (os_1.platform() === 'win32') {
+    fullFileName = fullFileName.replace(/\\/gi, '/');
+}
 const program = ts.createProgram([fullFileName], {
     noEmit: true,
     target: ts.ScriptTarget.ES5,
