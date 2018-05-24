@@ -6,6 +6,7 @@
     "jsx": "preserve",
     "target": "es6",
     "module": "commonjs",
+    "noUnusedLocals": true,
     "lib": ["es5", "es6", "es2015", "es2016", "es2017"]
   },
   "exclude": ["./tests", "node_modules"]
