@@ -38,7 +38,7 @@ export async function generateConnectTypes(filename: string) {
 
       fs.writeFile(filename, newFileContent, err => {
         if (err) {
-          return reject(err.message)
+          return reject(err)
         } else {
           return resolve()
         }
