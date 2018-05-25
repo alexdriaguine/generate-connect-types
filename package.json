@@ -1,9 +1,9 @@
 {
   "name": "generate-connect-types",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "main": "build/index.js",
   "bin": {
-    "generate-connect-types": "build/generate-connect-types.js"
+    "generate-connect-types": "build/bin.js"
   },
   "files": [
     "build"
@@ -14,7 +14,7 @@
     "compile:watch": "tsc -p tsconfig.json -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "prepublish": "rm -rf build && yarn test && yarn compile"
+    "prepublish": "yarn clean && yarn compile && yarn test"
   },
   "dependencies": {
     "typescript": "^2.8.3",
