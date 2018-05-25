@@ -2,7 +2,6 @@
   "compilerOptions": {
     "noEmitOnError": false,
     "declaration": true,
-    "declarationDir": "./build/typings",
     "rootDir": "./lib",
     "outDir": "./build",
     "jsx": "preserve",

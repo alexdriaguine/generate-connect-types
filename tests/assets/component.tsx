@@ -12,6 +12,17 @@ interface ConnectProps {
 }
 
 
+
+interface ConnectProps {
+  index: number;
+  name: string;
+  ble: Bla;
+  hoho: number;
+  nested: { as: { fudge: boolean } };
+  signIn: () => void;
+}
+
+
 type Bla = {
   foo: string;
 };
