@@ -16,7 +16,7 @@ const interfaceSubString = 'interface ConnectProps'
 
 describe('generate-connet-types', async () => {
   it('throw when not supplied a fileName', done => {
-    exec('node build/index.js', err => {
+    exec('node build/bin.js', err => {
       expect(err).toBeTruthy()
       done()
     })
@@ -26,7 +26,7 @@ describe('generate-connet-types', async () => {
       writeTemplate('tests/assets/component-inferred.tsx', templateInferred))
 
     it('injects a ConnectedProps into the file', done => {
-      exec('node build/index.js tests/assets/component-inferred.tsx', err => {
+      exec('node build/bin.js tests/assets/component-inferred.tsx', err => {
         expect(err).toBeFalsy()
         const content = fs.readFile(
           'tests/assets/component-inferred.tsx',
@@ -47,14 +47,14 @@ describe('generate-connet-types', async () => {
     beforeEach(() => writeTemplate('tests/assets/component.tsx', template))
 
     it('works when supplied a fileName', done => {
-      exec('node build/index.js tests/assets/component.tsx', err => {
+      exec('node build/bin.js tests/assets/component.tsx', err => {
         expect(err).toBeFalsy()
         done()
       })
     })
 
     it('injects a ConnectedProps into the file', done => {
-      exec('node build/index.js tests/assets/component.tsx', err => {
+      exec('node build/bin.js tests/assets/component.tsx', err => {
         expect(err).toBeFalsy()
         const content = fs.readFile(
           'tests/assets/component.tsx',

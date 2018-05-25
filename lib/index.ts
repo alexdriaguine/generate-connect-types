@@ -1,50 +1,48 @@
-#!/usr/bin/env node
-
 import * as ts from 'typescript'
 import * as fs from 'fs'
-import * as path from 'path'
 import {getTypeInformationFromNode} from './type-checker'
 import {insertInterfaceTemplateIntoFileContent} from './template'
+import * as path from 'path'
 import {platform} from 'os'
 
-const fileName = process.argv.slice(2)[0]
-if (!fileName) {
-  throw new Error('Need a filename!')
-}
-let fullFileName = path.resolve(process.cwd(), fileName)
-if (platform() === 'win32') {
-  fullFileName = fullFileName.replace(/\\/gi, '/')
-}
-
-const program = ts.createProgram([fullFileName], {
-  noEmit: true,
-  target: ts.ScriptTarget.ES2015,
-  jsx: ts.JsxEmit.Preserve,
-  rootDir: process.cwd(),
-})
-
-const checker = program.getTypeChecker()
-
-const sourceFile = program
-  .getSourceFiles()
-  .find(file => file.fileName === fullFileName)
-
-const props = getTypeInformationFromNode(sourceFile, checker)
-
-fs.readFile(fileName, (err, data) => {
-  if (err) {
-    throw new Error(err.message)
+export async function generateConnectTypes(filename: string) {
+  let fullFileName = path.resolve(process.cwd(), filename)
+  if (platform() === 'win32') {
+    fullFileName = fullFileName.replace(/\\/gi, '/')
   }
-  const newFileContent = insertInterfaceTemplateIntoFileContent(
-    data.toString(),
-    props,
-  )
 
-  fs.writeFile(fileName, newFileContent, err => {
-    if (err) {
-      throw new Error(err.message)
-    } else {
-      console.log('Created some props for you')
-    }
+  const program = ts.createProgram([fullFileName], {
+    noEmit: true,
+    target: ts.ScriptTarget.ES2015,
+    jsx: ts.JsxEmit.Preserve,
+    rootDir: process.cwd(),
   })
-})
+
+  const checker = program.getTypeChecker()
+
+  const sourceFile = program
+    .getSourceFiles()
+    .find(file => file.fileName === fullFileName)
+
+  const props = getTypeInformationFromNode(sourceFile, checker)
+
+  return new Promise((resolve, reject) => {
+    fs.readFile(filename, (err, data) => {
+      if (err) {
+        return reject(err.message)
+      }
+      const newFileContent = insertInterfaceTemplateIntoFileContent(
+        data.toString(),
+        props,
+      )
+
+      fs.writeFile(filename, newFileContent, err => {
+        if (err) {
+          return reject(err.message)
+        } else {
+          return resolve()
+        }
+      })
+    })
+  })
+}
