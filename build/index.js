@@ -39,7 +39,7 @@ function generateConnectTypes(filename) {
                 const newFileContent = template_1.insertInterfaceTemplateIntoFileContent(data.toString(), props);
                 fs.writeFile(filename, newFileContent, err => {
                     if (err) {
-                        return reject(err.message);
+                        return reject(err);
                     }
                     else {
                         return resolve();
